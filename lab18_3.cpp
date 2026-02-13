@@ -8,9 +8,11 @@
 using namespace std;
 
 struct student{
-
-    //[Missing Code 1] Define struct student with four members (name ,id , gender, gpa);
-    
+	string name;
+	int id;
+	char gender;
+	float gpa; 
+	//[Missing Code 1] Define struct student with four members (name ,id , gender, gpa);   
 };
 
 struct course{
@@ -35,15 +37,16 @@ student text2student(string text){
     
     //[Missing Code 2] Fill in the blank with the correct code.;
     s.name = name;
-    s.id = _____________;
-    s.gender = _____________;
-    s.gpa = _____________;
+    s.id = stoi(id);
+    s.gender = gen[0];
+    s.gpa = stof(gpa);
     
-    _____________;
+    return s;
+
 }
 
 
-student * findstudent(vector<student> allstudents,int key){ //[Missing Code 4] There is something wrong in this line.
+student * findstudent(vector<student> &allstudents,int key){ //[Missing Code 4] There is something wrong in this line.
 	for(unsigned int i = 0; i < allstudents.size(); i++){
 		if(allstudents[i].id  == key) return &allstudents[i];
 	}
@@ -103,7 +106,8 @@ int main(){
 			if(textline == "> Students"){
 				state = 3;
 			}else{
-			
+				allcourses.back().lecture_list.push_back(textline); //เอาชื่ออาจารย์ใน textline ไปเพิ่มในรายชื่อผู้สอน ของวิชาล่าสุดใน allcourses
+
 			    //[Missing Code 3] Append (push_back) textline to lecture_list[] of the recently added course in allcourses[];
 			    
 			}			
@@ -112,7 +116,9 @@ int main(){
 				state = 1;
 			}else{
 				student *p = findstudent(allstudents,atof(textline.c_str()));
-				
+			
+				allcourses.back().student_list.push_back(p);
+
 				//[Missing Code 5] Append (push_back) p to student_list of the recently added course in allcourses[];
 				
 			}
